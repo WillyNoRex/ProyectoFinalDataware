@@ -33,14 +33,17 @@
             btn_prueba = new Button();
             lblEstado = new Label();
             dgvDatos = new DataGridView();
+            txtBuscar = new TextBox();
+            btnBuscar = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvDatos).BeginInit();
             SuspendLayout();
             // 
             // btn_prueba
             // 
-            btn_prueba.Location = new Point(696, 19);
+            btn_prueba.Location = new Point(609, 14);
+            btn_prueba.Margin = new Padding(3, 2, 3, 2);
             btn_prueba.Name = "btn_prueba";
-            btn_prueba.Size = new Size(80, 32);
+            btn_prueba.Size = new Size(70, 24);
             btn_prueba.TabIndex = 4;
             btn_prueba.Text = "Probar";
             btn_prueba.UseVisualStyleBackColor = true;
@@ -50,9 +53,9 @@
             // 
             lblEstado.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             lblEstado.AutoSize = true;
-            lblEstado.Location = new Point(24, 410);
+            lblEstado.Location = new Point(21, 308);
             lblEstado.Name = "lblEstado";
-            lblEstado.Size = new Size(273, 20);
+            lblEstado.Size = new Size(214, 15);
             lblEstado.TabIndex = 6;
             lblEstado.Text = "La aplicación leerá datos de SQL Server.";
             // 
@@ -75,24 +78,45 @@
             dgvDatos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             dgvDatos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvDatos.EnableHeadersVisualStyles = false;
-            dgvDatos.Location = new Point(24, 72);
+            dgvDatos.Location = new Point(21, 54);
+            dgvDatos.Margin = new Padding(3, 2, 3, 2);
             dgvDatos.MultiSelect = false;
             dgvDatos.Name = "dgvDatos";
             dgvDatos.ReadOnly = true;
             dgvDatos.RowHeadersVisible = false;
             dgvDatos.RowHeadersWidth = 51;
             dgvDatos.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvDatos.Size = new Size(752, 292);
+            dgvDatos.Size = new Size(658, 219);
             dgvDatos.TabIndex = 7;
+            // 
+            // txtBuscar
+            // 
+            txtBuscar.Location = new Point(21, 12);
+            txtBuscar.Name = "txtBuscar";
+            txtBuscar.Size = new Size(377, 23);
+            txtBuscar.TabIndex = 8;
+            // 
+            // btnBuscar
+            // 
+            btnBuscar.Location = new Point(404, 5);
+            btnBuscar.Name = "btnBuscar";
+            btnBuscar.Size = new Size(150, 34);
+            btnBuscar.TabIndex = 9;
+            btnBuscar.Text = "Buscar Nombre";
+            btnBuscar.UseVisualStyleBackColor = true;
+            btnBuscar.Click += btnBuscar_Click;
             // 
             // Form1
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(700, 338);
+            Controls.Add(btnBuscar);
+            Controls.Add(txtBuscar);
             Controls.Add(dgvDatos);
             Controls.Add(lblEstado);
             Controls.Add(btn_prueba);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "Form1";
             Text = "Consulta de clientes - SQL Server";
             Load += Form1_Load;
@@ -105,5 +129,7 @@
         private Button btn_prueba;
         private Label lblEstado;
         private DataGridView dgvDatos;
+        private TextBox txtBuscar;
+        private Button btnBuscar;
     }
 }

@@ -24,6 +24,8 @@ namespace AppFase3
             cadenaConexion = configuracion.ConnectionString;
         }
 
+       
+
         public void ProbarConexion()
         {
             try
@@ -60,14 +62,16 @@ namespace AppFase3
 
         public DataTable FiltrarRegistros(string valorBusqueda)
         {
-            const string consulta = """
-                SELECT *
-                FROM Clientes
-                WHERE Categoria LIKE @filtro
-                """;
+            // Cambiamos 'Categoria' por las columnas reales de tu base de datos
+            const string consulta = """          
+        SELECT *          
+        FROM Clientes          
+        WHERE nombre LIKE @filtro OR apellido LIKE @filtro OR municipio LIKE @filtro          
+        """;
 
             try
             {
+                // Aquí usa el método equivalente que descubriste
                 using SqlConnection conexion = CrearConexion();
                 using SqlCommand comando = new(consulta, conexion);
                 using SqlDataAdapter adaptador = new(comando);
@@ -82,7 +86,7 @@ namespace AppFase3
             }
             catch (Exception ex)
             {
-                throw CrearError("No se pudo aplicar el filtro en SQL Server. Verifica que exista la columna Categoria y que la conexión sea válida.", ex);
+                throw CrearError("No se pudo aplicar el filtro en SQL Server. Verifica que existan las columnas y que la conexión sea válida.", ex);
             }
         }
 
