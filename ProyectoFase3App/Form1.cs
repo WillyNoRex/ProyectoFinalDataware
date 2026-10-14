@@ -114,5 +114,39 @@ namespace ProyectoFase3App
                 MessageBoxIcon.Warning);
             lblEstado.Text = "No se pudieron obtener datos de SQL Server.";
         }
+
+        private void btnBuscar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                
+                string textoBusqueda = txtBuscar.Text.Trim();
+
+            
+                DataTable resultados = accesoDatos.FiltrarRegistros(textoBusqueda);
+
+                dgvDatos.DataSource = resultados;
+
+                FormatearTabla();
+
+                if (resultados.Rows.Count == 0)
+                {
+                    lblEstado.Text = "No se encontraron coincidencias.";
+                    MessageBox.Show(
+                        "No se encontraron clientes que coincidan con la búsqueda.",
+                        "Búsqueda sin resultados",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+                }
+                else
+                {
+                    lblEstado.Text = $"Registros encontrados: {resultados.Rows.Count}";
+                }
+            }
+            catch (Exception ex)
+            {
+                MostrarError("No fue posible realizar la búsqueda.", ex);
+            }
+        }
     }
 }
