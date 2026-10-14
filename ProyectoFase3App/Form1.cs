@@ -37,18 +37,73 @@ namespace ProyectoFase3App
             }
         }
 
+
         private void CargarTodosLosRegistros()
         {
             try
             {
                 DataTable registros = accesoDatos.ObtenerTodosLosRegistros();
-                lblEstado.Text = $"Registros cargados desde SQL Server: {registros.Rows.Count}";
+
+                dgvDatos.AutoGenerateColumns = true;
+                dgvDatos.DataSource = registros;
+                FormatearTabla();
+
+
+                if (registros.Rows.Count == 0)
+                {
+                    lblEstado.Text = "No hay registros disponibles en la base de datos.";
+                }
+                else
+                {
+                    lblEstado.Text = $"Registros cargados desde SQL Server: {registros.Rows.Count}";
+                }
+
             }
             catch (Exception ex)
             {
                 MostrarError("No fue posible cargar los registros.", ex);
             }
         }
+
+
+
+        private void FormatearTabla()
+        {
+            // Encabezados claros en español
+            CambiarEncabezado("cliente_id", "ID cliente");
+            CambiarEncabezado("nombre", "Nombre");
+            CambiarEncabezado("apellido", "Apellido");
+            CambiarEncabezado("genero", "Género");
+            CambiarEncabezado("edad", "Edad");
+            CambiarEncabezado("departamento", "Departamento");
+            CambiarEncabezado("municipio", "Municipio");
+            CambiarEncabezado("correo", "Correo electrónico");
+            CambiarEncabezado("fecha_registro", "Fecha de registro");
+            CambiarEncabezado("tipo_cliente", "Tipo de cliente");
+            CambiarEncabezado("total_compras_usd", "Total de compras (USD)");
+
+            // Formato de fecha
+            if (dgvDatos.Columns.Contains("fecha_registro"))
+            {
+                dgvDatos.Columns["fecha_registro"]!.DefaultCellStyle.Format = "dd/MM/yyyy";
+            }
+
+            // Formato de números con dos decimales
+            if (dgvDatos.Columns.Contains("total_compras_usd"))
+            {
+                dgvDatos.Columns["total_compras_usd"]!.DefaultCellStyle.Format = "N2";
+            }
+        }
+
+        private void CambiarEncabezado(string nombreColumna, string encabezado)
+        {
+            if (dgvDatos.Columns.Contains(nombreColumna))
+            {
+                dgvDatos.Columns[nombreColumna]!.HeaderText = encabezado;
+            }
+        }
+
+
 
         private void MostrarError(string contexto, Exception ex)
         {
